@@ -1,11 +1,11 @@
 # Firefox Bookmarks runner
-[![Get the runner from kde store](https://raw.githubusercontent.com/ZER0-X/badges/main/kde/store/get-the-app-runner.svg)](https://www.pling.com/p/)
+[![Get the runner from kde store](https://raw.githubusercontent.com/ZER0-X/badges/main/kde/store/get-the-app-runner.svg)](https://www.pling.com/p/1722801/)
 
 A KRunner plugin for searching and opening Firefox bookmarks.
 
 # Installation
 ## Install from git source code
-Go the the directory that you want to keep the code in.
+Go to the directory that you want to keep the code in it, for example `/home/<username>/.local/share/krunner-sources/`.
 ```bash
 $ git clone https://github.com/zer0-x/krunner-firefox-bookmarks.git
 $ cd krunner-firefox-bookmarks
@@ -30,10 +30,11 @@ Please run the uninstall script manually, because the GUI will remove the script
 # Usage & Configuration
 > The key words are different depending on the language so check the list bellow.
 1. Type the keyword `f` in KRunner.
-2. 2. type `<Space>` and search in your bookmarks.
+2. type `<Space>` and search in your bookmarks.
 3. Click `<Enter>` the open the bookmark in a new Firefox tab.
 4. Also you are able use the actions to open the bookmark in a new window or copy the URL.
 ## Fetch the database
+> The key words are different depending on the language so check the list bellow.
 If want to update the cashed database after modifing your bookmarks.
 1. Type the keyword `f` in KRunner.
 2. type `<Space>` and then type `update`.
