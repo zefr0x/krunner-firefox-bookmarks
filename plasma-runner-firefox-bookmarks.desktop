@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Firefox Bookmarks
+Comment=Search and open firefox bookmarks.
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=firefox
+X-KDE-PluginInfo-Author=zer0-x
+X-KDE-PluginInfo-Website=https://github.com/zer0-x/krunner-firefox-bookmarks/
+X-KDE-PluginInfo-Name=Firefox Bookmarks
+X-KDE-PluginInfo-Version=1.1.0
+X-KDE-PluginInfo-License=GPL-3.0
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-API=DBus
+X-Plasma-DBusRunner-Service=com.github.zer0-x.krunner-firefox-bookmarks
+X-Plasma-DBusRunner-Path=/krunnerFirefoxBookMarks
