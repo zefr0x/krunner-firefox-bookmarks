@@ -1,3 +1,3 @@
 [D-BUS Service]
-Name=com.github.zer0-x.firefox-bookmarks
+Name=com.github.zer0-x.krunner-firefox-bookmarks
 Exec=/usr/bin/python3 "%{PROJECTDIR}/%{APPNAMELC}.py"
