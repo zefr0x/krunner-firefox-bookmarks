@@ -1,0 +1,37 @@
+# Copyright (C) zer0-x
+#
+# zer0-x <zer0-x.7ty50@aleeas.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: Arabic krunner-firefox-bookmarks\n"
+"POT-Creation-Date: 2022-03-02 22:41+0300\n"
+"PO-Revision-Date: 2022-03-02 22:45+0300\n"
+"Last-Translator: zer0-x <zer0-x.7ty50@aleeas.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: ./main.py:19
+msgid "f"
+msgstr "ف"
+
+#: ./main.py:56
+msgid "update"
+msgstr "تحديث"
+
+#: ./main.py:61
+msgid "Database fetched successfully!"
+msgstr "جُلِبَت قاعِدَةُ البَياناتِ بِنَجاح!"
+
+#: ./main.py:88
+msgid "Open in new window"
+msgstr "الفَتحُ فِي نَافِذَةٍ جَديدَة"
+
+#: ./main.py:89
+msgid "Copy bookmark URL"
+msgstr "نَسخُ عُنوانِ URL"
+

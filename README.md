@@ -41,12 +41,15 @@ If want to update the cashed database after modifing your bookmarks.
 
 # Key words list
 The key words are different form language to another so check the list bellow to find the appropriate key words for you.
+- Arabic
+    - `ف`
+    - `تحديث`
 - English
-    1. `f`
-    2. `update`
+    - `f`
+    - `update`
 - ...
-    1. `f`
-    2. `update`
+    - `f`
+    - `update`
 
 
 # Thanks to
