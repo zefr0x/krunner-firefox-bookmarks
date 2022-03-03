@@ -23,7 +23,7 @@ msgstr "f"
 
 #: main.py:56
 msgid "update"
-msgstr "Bijwerken"
+msgstr "bijwerken"
 
 #: main.py:61
 msgid "Database fetched successfully!"
