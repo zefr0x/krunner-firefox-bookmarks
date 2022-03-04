@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-03-02 22:41+0300\n"
+"PO-Revision-Date: 2022-03-03 13:43+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: main.py:19
+msgid "f"
+msgstr "f"
+
+#: main.py:56
+msgid "update"
+msgstr "bijwerken"
+
+#: main.py:61
+msgid "Database fetched successfully!"
+msgstr "De databank is uitgelezen!"
+
+#: main.py:88
+msgid "Open in new window"
+msgstr "Openen in nieuw venster"
+
+#: main.py:89
+msgid "Copy bookmark URL"
+msgstr "Bladwijzeradres kopiëren"
