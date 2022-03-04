@@ -48,6 +48,9 @@ The key words are different form language to another so check the list bellow to
 - English
     - `f`
     - `update`
+- Dutch
+    - `f`
+    - `bijwerken`
 - ...
     - `f`
     - `update`
