@@ -1,55 +1,62 @@
 """Access the bookmarks database and query the data."""
-
-import sqlite3
-import tempfile
-import shutil
-import configparser
-from pathlib import Path
+# The next imports are on-time import in the middle of the file to save memory.
+# from pathlib import Path
+# import sqlite3
+# import tempfile
+# import shutil
+# import configparser
 
 MAX_RESULTS = 13
 
 
 class FirefoxBookMarks:
-    """History class for the FireFox browser."""
+    """BookMarks class for the FireFox browser."""
 
     def __init__(self) -> None:
-        """Find the database location and create temp file."""
-        # Set history location
-        self.history_location = self.search_places()
-
+        """Create temp file and copy the database to it."""
         # Temporary file
-        # Using FF63 the DB was locked for exclusive use of FF
-        self.temporary_history_location = tempfile.mktemp()
+        self.temporary_database_location = __import__("tempfile").mktemp()
+        self.fetch_database()
+        return None
 
-    def fetch_database(self):
+    def fetch_database(self) -> None:
         """Fetch database to temp file."""
-        shutil.copyfile(self.history_location, self.temporary_history_location)
+        # Using FireFox63 the DB was locked for exclusive use of FireFox,
+        # so we need to create a copy of it to a temp file.
+        __import__("shutil").copyfile(
+            self.get_database_location(), self.temporary_database_location
+        )
+        return None
 
-    def connect_to_database(self):
-        """Create a database connection if there was not."""
-        try:
-            self.conn
-        except AttributeError:
-            # Open Firefox history database
-            self.conn = sqlite3.connect(self.temporary_history_location)
+    def get_database_location(self) -> str:
+        """Get bookmarks database path."""
+        from pathlib import Path
 
-    def search_places(self) -> Path:
-        """Get history database path."""
-        #   Firefox folder path
+        # Firefox folder path
         firefox_path = Path.joinpath(Path.home(), ".mozilla/firefox/")
-        #   Firefox profiles configuration file path
-        conf_path = Path.joinpath(firefox_path, "profiles.ini")
-        #   Profile config parse
-        profile = configparser.RawConfigParser()
-        profile.read(conf_path)
-        prof_path = profile.get("Profile0", "Path")
-        #   Sqlite db directory path
-        sql_path = Path.joinpath(firefox_path, prof_path)
-        #   Sqlite db path
-        return Path.joinpath(sql_path, "places.sqlite")
 
-    def search(self, term):
-        """Search for a term in the database and return a result."""
+        # Read Firefox profiles configuration file to get the database file path.
+        profile = __import__("configparser").RawConfigParser()
+        profile.read(Path.joinpath(firefox_path, "profiles.ini"))
+
+        # Sqlite db directory path
+        return str(
+            Path.joinpath(
+                Path.joinpath(firefox_path, profile.get("Profile0", "Path")),
+                "places.sqlite",
+            )
+        )
+
+    def connect_to_database(self) -> None:
+        """Create a database connection if there was not."""
+        if not hasattr(self, "conn"):
+            # Connect to Firefox bookmarks database in temp file.
+            self.con = __import__("sqlite3").connect(self.temporary_database_location)
+            self.cursor = self.con.cursor()
+        return None
+
+    def search(self, term) -> list:
+        """Search for a term in the database and return the results."""
         # VULN sql injection.
         query = (
             "SELECT A.title, url FROM moz_bookmarks AS A"
@@ -68,12 +75,11 @@ class FirefoxBookMarks:
         self.connect_to_database()
 
         # Query execution
-        cursor = self.conn.cursor()
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        return rows
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
     def close(self):
         """Close the database to save memory while not using it."""
+        del self.cursor
         self.conn.close()
         del self.conn
