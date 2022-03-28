@@ -45,9 +45,8 @@ class Runner(dbus.service.Object):
     @dbus.service.method(IFACE, in_signature="s", out_signature="a(sssida{sv})")
     def Match(self, query: str) -> list:
         """Get the matches and return a list of tupels."""
-        returns: list = []
-
         if query.startswith(key_word + " ") or query == key_word:
+            returns: list = []
             query = query[key_word_length:].strip()
 
             if query == _("update"):
@@ -63,6 +62,7 @@ class Runner(dbus.service.Object):
                     )
                 )
 
+            relevance = 13.0
             for bookmark in self.bookmarks.search(query):
                 returns.append(
                     (
@@ -70,10 +70,11 @@ class Runner(dbus.service.Object):
                         bookmark[0],
                         icon_path,
                         100,
-                        1.0,
+                        relevance,
                         {},
                     )
                 )
+                relevance -= 1.0
 
             return returns
         return []

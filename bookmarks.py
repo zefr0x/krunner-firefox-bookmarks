@@ -59,16 +59,19 @@ class FirefoxBookMarks:
         """Search for a term in the database and return the results."""
         # VULN sql injection.
         query = (
-            "SELECT A.title, url FROM moz_bookmarks AS A"
+            "SELECT A.title, B.url FROM moz_bookmarks AS A"
             + " JOIN moz_places AS B ON(A.fk = B.id)"
             + ' WHERE A.title LIKE "%%%s%%"'
         ) % term
 
         if term == "":
-            query += " ORDER BY A.lastModified DESC"
+            query += " ORDER BY visit_count DESC, A.lastModified DESC"
         else:
             # VULN sql injection.
-            query += ' ORDER BY instr(LOWER(A.title), LOWER("%s")) ASC' % term
+            query += (
+                ' ORDER BY instr(LOWER(A.title), LOWER("%s")) ASC, visit_count DESC'
+                % term
+            )
 
         query += " LIMIT %d" % MAX_RESULTS
 
