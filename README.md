@@ -55,6 +55,9 @@ The key words are different form language to another so check the list bellow to
     - `f`
     - `update`
 
+# TODO
+- [ ] Display the favicons rather then firefox's icon. FireFox do save them in `favicons.sqlite` but i don't know how should I link them with the bookmarks or even how to read the image it self, yet.
+- [ ] Add an action to open a sharing dialog to share the URL.
 
 # Thanks to
 - `Riccardo Massidda` since his extensions [ulauncher-firefox-history](https://github.com/rmassidda/ulauncher-firefox-history) was the base for this runner.
