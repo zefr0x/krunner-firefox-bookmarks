@@ -57,12 +57,12 @@ class FirefoxBookMarks:
 
     def search(self, term = "") -> list:
         """Search for a term in the database and return the results."""
-        args = (term)
-
         query = (
             "SELECT A.title, B.url FROM moz_bookmarks AS A"
             + " JOIN moz_places AS B ON(A.fk = B.id)"
         )
+
+        args = term
 
         if term == "":
             query += "ORDER BY visit_count DESC, A.lastModified DESC"
