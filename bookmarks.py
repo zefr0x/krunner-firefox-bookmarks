@@ -55,30 +55,31 @@ class FirefoxBookMarks:
             self.cursor = self.con.cursor()
         return None
 
-    def search(self, term) -> list:
+    def search(self, term = "") -> list:
         """Search for a term in the database and return the results."""
-        # VULN sql injection.
+        args = (term)
+
         query = (
             "SELECT A.title, B.url FROM moz_bookmarks AS A"
             + " JOIN moz_places AS B ON(A.fk = B.id)"
-            + ' WHERE A.title LIKE "%%%s%%"'
-        ) % term
+        )
 
         if term == "":
-            query += " ORDER BY visit_count DESC, A.lastModified DESC"
+            query += "ORDER BY visit_count DESC, A.lastModified DESC"
+
         else:
-            # VULN sql injection.
+            query += " WHERE A.title LIKE ? "
             query += (
-                ' ORDER BY instr(LOWER(A.title), LOWER("%s")) ASC, visit_count DESC'
-                % term
+                "ORDER BY instr(LOWER(A.title), LOWER(?)) ASC, visit_count DESC"
             )
+            args = ('%'+term+'%', term)
 
         query += " LIMIT %d" % MAX_RESULTS
 
         self.connect_to_database()
 
         # Query execution
-        self.cursor.execute(query)
+        self.cursor.execute(query, args)
         return self.cursor.fetchall()
 
     def close(self):
