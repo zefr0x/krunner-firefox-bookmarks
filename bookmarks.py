@@ -62,16 +62,12 @@ class FirefoxBookMarks:
             + " JOIN moz_places AS B ON(A.fk = B.id)"
         )
 
-        args = term
-
         if term == "":
             query += "ORDER BY visit_count DESC, A.lastModified DESC"
-
+            args = ()
         else:
             query += " WHERE A.title LIKE ? "
-            query += (
-                "ORDER BY instr(LOWER(A.title), LOWER(?)) ASC, visit_count DESC"
-            )
+            query += "ORDER BY instr(LOWER(A.title), LOWER(?)) ASC, visit_count DESC"
             args = ('%'+term+'%', term)
 
         query += " LIMIT %d" % MAX_RESULTS
