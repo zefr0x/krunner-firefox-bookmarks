@@ -108,7 +108,7 @@ class Runner(dbus.service.Object):
 
     @dbus.service.method(IFACE)
     def Teardown(self):
-        """Sava memory by closing database connection when not needed."""
+        """Save memory by closing database connection when not needed."""
         self.bookmarks.close()
 
 
