@@ -39,16 +39,37 @@ class FirefoxBookMarks:
         profile = __import__("configparser").RawConfigParser()
         profile.read(Path.joinpath(firefox_path, "profiles.ini"))
         profile_in_use = None
+        # TODO config file
         for p in profile.sections():
             try:
                 suffix = profile[p]["Default"].split(".")[1]
                 if "dev" not in suffix and "esr" not in suffix:
-                profile_in_use = profile[p]["Default"]
-                break
+                    release = profile[p]["Default"]
+                    break
+                else:
+                    esr_dev = profile[p]["Default"]
             except KeyError:
-                pass
-
-        if not profile_in_use:
+                try:
+                    suffix = profile[p]["Path"].split(".")[1]
+                    if "defaults-release" in suffix:
+                        default_release = profile[p]["Path"]
+                    if "defaults-esr" in suffix:
+                        default_esr = profile[p]["Path"]
+                    if "dev-edition-default" in suffix:
+                        default_dev = profile[p]["Path"]
+                except KeyError:
+                    pass
+        if release:
+            profile_in_use = release
+        elif esr_dev:
+            profile_in_use = esr_dev
+        elif default_release:
+            profile_in_use = default_release
+        elif default_esr:
+            profile_in_use = default_esr
+        elif default_dev:
+            profile_in_use = default_dev
+        else:
             profile_in_use = profile.get("Profile0", "Path")
 
         # Sqlite db directory path
