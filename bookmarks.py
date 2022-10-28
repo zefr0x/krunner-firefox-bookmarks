@@ -38,11 +38,19 @@ class FirefoxBookMarks:
         # Read Firefox profiles configuration file to get the database file path.
         profile = __import__("configparser").RawConfigParser()
         profile.read(Path.joinpath(firefox_path, "profiles.ini"))
+        profile_in_use = None
+        for p in profile.sections():
+            if p["Default"]:
+                profile_in_use = p["Default"]
+                break
+
+        if not profile_in_use:
+            profile_in_use = profile.get("Profile0", "Path")
 
         # Sqlite db directory path
         return str(
             Path.joinpath(
-                Path.joinpath(firefox_path, profile.get("Profile0", "Path")),
+                Path.joinpath(firefox_path, profile_in_use),
                 "places.sqlite",
             )
         )
