@@ -41,6 +41,8 @@ class FirefoxBookMarks:
         profile_in_use = None
         for p in profile.sections():
             try:
+                suffix = profile[p]["Default"].split(".")[1]
+                if "dev" not in suffix and "esr" not in suffix:
                 profile_in_use = profile[p]["Default"]
                 break
             except KeyError:
