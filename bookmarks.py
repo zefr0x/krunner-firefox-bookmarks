@@ -40,9 +40,11 @@ class FirefoxBookMarks:
         profile.read(Path.joinpath(firefox_path, "profiles.ini"))
         profile_in_use = None
         for p in profile.sections():
-            if p["Default"]:
-                profile_in_use = p["Default"]
+            try:
+                profile_in_use = profile[p]["Default"]
                 break
+            except KeyError:
+                pass
 
         if not profile_in_use:
             profile_in_use = profile.get("Profile0", "Path")
