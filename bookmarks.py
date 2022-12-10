@@ -36,13 +36,51 @@ class FirefoxBookMarks:
         firefox_path = Path.joinpath(Path.home(), ".mozilla/firefox/")
 
         # Read Firefox profiles configuration file to get the database file path.
-        profile = __import__("configparser").RawConfigParser()
-        profile.read(Path.joinpath(firefox_path, "profiles.ini"))
+        from configparser import RawConfigParser
+
+        profiles = RawConfigParser()
+        profiles.read(Path.joinpath(firefox_path, "profiles.ini"))
+
+        (
+            first_default,
+            esr_version_default,
+            dev_version_default,
+        ) = ("", "", "")
+
+        for profile in profiles.sections():
+            if profile.startswith("Install"):
+                try:
+                    dir = profiles[profile]["Default"]
+                except KeyError:
+                    continue
+
+                if not dir.endswith(".dev-edition-default") and not dir.endswith(
+                    ".default-esr"
+                ):
+                    # First non esr or dev default profile.
+                    first_default = dir
+                    break
+                elif dir.endswith(".default-esr"):
+                    esr_version_default = dir
+                elif dir.endswith(".dev-edition-default"):
+                    dev_version_default = dir
+
+        for profile_path in (
+            first_default,
+            esr_version_default,
+            dev_version_default,
+        ):
+            if profile_path:
+                break
 
         # Sqlite db directory path
         return str(
             Path.joinpath(
-                Path.joinpath(firefox_path, profile.get("Profile0", "Path")),
+                Path.joinpath(
+                    firefox_path,
+                    # Fallback to Profile0.
+                    profile_path or profiles.get("Profile0", "Path"),
+                ),
                 "places.sqlite",
             )
         )
