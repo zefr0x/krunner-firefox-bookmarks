@@ -25,7 +25,7 @@ DBusGMainLoop(set_as_default=True)
 
 OBJPATH = "/krunnerFirefoxBookMarks"
 IFACE = "org.kde.krunner1"
-SERVICE = "com.github.zer0-x.krunner-firefox-bookmarks"
+SERVICE = "io.github.zer0-x.krunner-firefox-bookmarks"
 
 
 class Runner(dbus.service.Object):
