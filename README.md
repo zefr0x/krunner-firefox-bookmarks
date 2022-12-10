@@ -1,3 +1,7 @@
+> **Warning** : This repository/project is no longer maintained. I'm no longer using KDE's KRunner. If you are interested in the plugin, it's free software under the GPL-3.0 license, so you can create a fork and do any thing you want with it.
+
+If you want an alternative, I created [`foxmarks`](https://github.com/zer0-x/foxmarks) and I use it with [`rofi`](https://github.com/davatorium/rofi).
+
 # Firefox Bookmarks runner
 [![Get the runner from kde store](https://raw.githubusercontent.com/ZER0-X/badges/main/kde/store/get-the-app-runner.svg)](https://www.pling.com/p/1722801/)
 
